@@ -28,12 +28,13 @@
     }
 
     .pink-cell {
-      background-color: #f4c6c6;
+      background-color: #fdfdfd;
     }
 
     .green-cell {
       background-color: #38761D;
       color: white;
+      width: 100px;
     }
 
     .light-blue {
@@ -59,6 +60,10 @@
     .bordered td, .bordered th {
       border: 1px solid #ccc;
     }
+    .white-box{
+        background-color: #ffffff;
+        border: none !important;
+    }
   </style>
 </head>
 <body>
@@ -68,7 +73,7 @@
       <th colspan="4">Profit Booster 🔥</th>
       <th>No. of orders</th>
       <th>Selling Price</th>
-      <th colspan="5"></th>
+      <th colspan="5" class="white-box"></th>
     </tr>
 
     <!-- Abandoned Checkout -->
@@ -82,7 +87,7 @@
       <td class="red-cell">0</td>
       <td class="red-cell">0</td>
       <td class="red-cell">0</td>
-      <td class="green-cell">0</td>
+      <td class="red-cell">0</td>
       <td class="red-cell">0</td>
     </tr>
 
@@ -90,14 +95,15 @@
     <tr class="pink-cell">
       <td>NDR Calling</td>
       <td class="green-cell">0.00%</td>
-      <td class="green-cell">0</td>
-      <td>₹0.00</td>
+      <td >0</td>
+      <td class="green-cell">₹0.00</td>
       <td>0</td>
       <td>₹0.00</td>
       <td class="red-cell">0</td>
       <td class="red-cell bold-yellow">888</td>
       <td class="red-cell" colspan="2">Total RTO Now</td>
-      <td class="red-cell green-cell">60.00% NDR Delivery Rate</td>
+      <td class="green-cell">60.00%</td>
+      <td class="red-cell">NDR Delivery Rate</td>
     </tr>
 
     <!-- Abandoned + NDR -->
@@ -113,51 +119,45 @@
     <!-- Orders Delivered -->
     <tr class="pink-cell">
       <td>Orders Delivered</td>
-      <td class="green-cell">₹0.00</td>
+      <td class="green-cell" colspan="3">₹0.00</td>
       <td>0</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
 
     <!-- Cost of Product -->
     <tr class="pink-cell">
       <td>Cost of Product</td>
-      <td class="green-cell">₹0.00</td>
+      <td class="green-cell" colspan="3">₹0.00</td>
       <td>0</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
 
     <!-- Shipping Cost -->
     <tr class="pink-cell">
       <td>Shipping Cost</td>
-      <td class="green-cell">₹0.00</td>
+      <td class="green-cell" colspan="3">₹0.00</td>
       <td>0</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
 
     <!-- RTO Shipping -->
     <tr class="pink-cell">
       <td>RTO Shipping</td>
-      <td class="green-cell">₹0.00</td>
+      <td class="green-cell" colspan="3">₹0.00</td>
       <td>0</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
 
     <!-- Total COGS -->
     <tr class="section-total">
-      <td colspan="3">Total COGS</td>
+      <td colspan="5">Total COGS</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
 
     <!-- Profit -->
     <tr class="section-total">
-      <td colspan="3">Profit</td>
+      <td colspan="5">Profit</td>
       <td>₹0.00</td>
-      <td colspan="5"></td>
     </tr>
   </table>
 
