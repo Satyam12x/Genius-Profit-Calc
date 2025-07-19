@@ -71,6 +71,7 @@
             padding: 8px;
             text-align: left;
             vertical-align: middle;
+            width: 100px;
         }
         .bold {
             font-weight: bold;
@@ -101,6 +102,10 @@
             text-align: center;
             min-width: 150px;
         }
+        .red{
+            background-color: red;
+            padding: 0px !important;
+        }
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -109,7 +114,7 @@
             color: white;
             text-align: center;
             font-weight: bold;
-            border: 2px solid #000;
+            border: 0px solid #000;
         }
         .dashboard div {
             border: 1px solid #000;
@@ -221,7 +226,7 @@
                 <td contenteditable="true" class="green-cell" id="rtoShipping">0.00</td>
                 <td contenteditable="true" class="green-cell" id="middleZero4">0</td>
                 <td id="totalRtoShipping">₹0.00</td>
-                <td rowspan="2">
+                <td rowspan="2" class="red">
                     <div class="dashboard">
                         <div class="big-number" id="totalRtoNowDashboard">888</div>
                         <div class="rto-text">RTO Products after abandoned<br>checkout and NDR</div>
