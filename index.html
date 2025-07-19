@@ -101,6 +101,40 @@
             text-align: center;
             min-width: 150px;
         }
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            background-color: red;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #000;
+        }
+        .dashboard div {
+            border: 1px solid #000;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .big-number {
+            font-size: 40px;
+        }
+        .cost {
+            font-size: 24px;
+            color: #fff;
+        }
+        .highlight-yellow {
+            color: yellow;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .rto-text {
+            font-size: 16px;
+            line-height: 1.3;
+        }
     </style>
 </head>
 <body>
@@ -187,20 +221,28 @@
                 <td contenteditable="true" class="green-cell" id="rtoShipping">0.00</td>
                 <td contenteditable="true" class="green-cell" id="middleZero4">0</td>
                 <td id="totalRtoShipping">₹0.00</td>
-                <td class="red-box" rowspan="2">#DIV/0!<br><span class="note">RTO Products after abandoned checkout and NDR</span></td>
+                <td rowspan="2">
+                    <div class="dashboard">
+                        <div class="big-number" id="totalRtoNowDashboard">888</div>
+                        <div class="rto-text">RTO Products after abandoned<br>checkout and NDR</div>
+                        <div>0</div>
+                        <div>0</div>
+                        <div class="cost" id="actualCost">₹0.00</div>
+                        <div class="highlight-yellow">Actual Cost of that day</div>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td class="darksalmon">Product Damage During RTO</td>
                 <td contenteditable="true" class="green-cell" id="damageRate">0.00%</td>
                 <td id="damageCost">₹0.00</td>
                 <td id="damageExtra1">₹0.00</td>
-                <td id="damageExtra2">₹0.00</td>
             </tr>
             <tr class="total-row">
                 <td class="darksalmon">Total COGS</td>
                 <td colspan="2"></td>
                 <td class="bold" id="totalCogs">₹0.00</td>
-                <td class="red-box right bold" id="actualCost">₹0.00<br><span class="note">Actual Cost of that day</span></td>
+                <td></td>
             </tr>
             <tr class="total-row">
                 <td class="darksalmon bold">Profit</td>
@@ -248,7 +290,7 @@
                 <td class="darksalmon">Orders Delivered</td>
                 <td id="boosterDeliveredRevenue">₹0.00</td>
                 <td></td>
-                <td id="boosterDeliveredOrders">0</td>
+                <td id="c-table" id="boosterDeliveredOrders">0</td>
                 <td id="boosterDeliveredTotal">₹0.00</td>
                 <td></td>
                 <td></td>
@@ -467,11 +509,11 @@
             document.getElementById('totalShipping').textContent = formatCurrency(totalShipping);
             document.getElementById('totalRtoShipping').textContent = formatCurrency(totalRtoShipping);
             document.getElementById('damageCost').textContent = formatCurrency(damageLoss);
-            document.getElementById('damageExtra1').textContent = formatCurrency(damageLoss); // Mirror damageLoss for now
-            document.getElementById('damageExtra2').textContent = formatCurrency(damageLoss); // Mirror damageLoss for now
+            document.getElementById('damageExtra1').textContent = formatCurrency(damageLoss);
             document.getElementById('totalCogs').textContent = formatCurrency(totalCogs);
-            document.getElementById('actualCost').innerHTML = formatCurrency(totalCogs) + '<br><span class="note">Actual Cost of that day</span>';
+            document.getElementById('actualCost').textContent = formatCurrency(totalCogs);
             document.getElementById('profit').textContent = formatCurrency(profit);
+            document.getElementById('totalRtoNowDashboard').textContent = totalRtoNow;
 
             // Update Profit Booster Section
             document.getElementById('abandonedOrders').textContent = abandonedOrders;
