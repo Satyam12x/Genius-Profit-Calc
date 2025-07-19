@@ -5,7 +5,11 @@ function parseInput(id) {
 }
 
 function formatCurrency(value, currency = '₹') {
-    return currency + value.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+    return currency + value.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatPercentage(value) {
+    return value.toFixed(2) + '%';
 }
 
 function calculate() {
@@ -13,38 +17,50 @@ function calculate() {
     const totalOrders = parseInput('totalOrders');
     const cancelled = parseInput('cancelled');
     const rtoOrders = parseInput('rtoOrders');
+    const rtoPercentInput = parseInput('rtoPercent');
     const sellingPrice = parseInput('sellingPrice');
-    const costPrice = parseInput('productCost');
+    const productCost = parseInput('productCost');
     const fbCost = parseInput('fbCost');
     const fbGST = parseInput('fbGST');
     const shippingCost = parseInput('shippingCost');
     const rtoShipping = parseInput('rtoShipping');
     const damageRate = parseInput('damageRate');
     const abandonedCheckout = parseInput('abandonedCheckout');
+    const abandonedCheckout2 = parseInput('abandonedCheckout2');
     const ndrCalling = parseInput('ndrCalling');
+    const ndrRevenue = parseInput('ndrRevenue');
+    const ndrRate = parseInput('ndrRate');
     const shopifySubscription = parseInput('shopifySubscription');
     const shopifyApp = parseInput('shopifyApp');
     const otherApp = parseInput('otherApp');
     const telecaller = parseInput('telecaller');
     const otherCharges = parseInput('otherCharges');
+    const middleZero1 = parseInput('middleZero1');
+    const middleZero2 = parseInput('middleZero2');
+    const middleZero3 = parseInput('middleZero3');
+    const middleZero4 = parseInput('middleZero4');
+    const boosterDeliveredRevenue = parseInput('boosterDeliveredRevenue');
+    const boosterProductCost = parseInput('boosterProductCost');
+    const boosterShippingCost = parseInput('boosterShippingCost');
+    const boosterRtoShipping = parseInput('boosterRtoShipping');
 
+    // Orders Calculations
     const toBeShipped = totalOrders - cancelled;
     const delivered = toBeShipped - rtoOrders;
-
     const cancelPercent = totalOrders ? (cancelled / totalOrders) * 100 : 0;
     const rtoPercent = toBeShipped ? (rtoOrders / toBeShipped) * 100 : 0;
     const deliveredPercent = toBeShipped ? (delivered / toBeShipped) * 100 : 0;
-
-    const costShipped = toBeShipped * costPrice;
-    const rtoValue = rtoOrders * costPrice;
+    const costShipped = toBeShipped * productCost;
+    const rtoValue = rtoOrders * productCost;
     const moneyReceived = delivered * sellingPrice;
 
+    // Price and Costing Calculations
     const totalSelling = delivered * sellingPrice;
-    const totalProductCost = delivered * costPrice;
+    const totalProductCost = delivered * productCost;
     const totalFbCost = fbCost + fbGST;
     const totalShipping = delivered * shippingCost;
     const totalRtoShipping = rtoOrders * rtoShipping;
-    const damageLoss = rtoOrders * costPrice * (damageRate / 100);
+    const damageLoss = rtoOrders * productCost * (damageRate / 100);
     const totalCogs = totalProductCost + totalFbCost + totalShipping + totalRtoShipping + damageLoss;
     const profit = totalSelling - totalCogs;
 
@@ -53,16 +69,15 @@ function calculate() {
     const ndrOrders = Math.round(toBeShipped * (ndrCalling / 100));
     const totalRtoNow = rtoOrders - (abandonedOrders + ndrOrders);
     const totalDeliveredNow = delivered + abandonedOrders + ndrOrders;
-    const boosterDeliveredRevenue = (abandonedOrders + ndrOrders) * sellingPrice;
-    const boosterProductCost = (abandonedOrders + ndrOrders) * costPrice;
-    const boosterShippingCost = (abandonedOrders + ndrOrders) * shippingCost;
-    const boosterRtoShipping = totalRtoNow * rtoShipping;
-    const boosterTotalCogs = boosterProductCost + boosterShippingCost + boosterRtoShipping;
-    const boosterProfit = boosterDeliveredRevenue - boosterTotalCogs;
-    const ndrRate = toBeShipped ? (totalRtoNow / toBeShipped) * 100 : 0;
+    const boosterDeliveredRevenueCalc = (abandonedOrders + ndrOrders) * sellingPrice;
+    const boosterProductCostCalc = (abandonedOrders + ndrOrders) * productCost;
+    const boosterShippingCostCalc = (abandonedOrders + ndrOrders) * shippingCost;
+    const boosterRtoShippingCalc = totalRtoNow * rtoShipping;
+    const boosterTotalCogs = boosterProductCostCalc + boosterShippingCostCalc + boosterRtoShippingCalc;
+    const boosterProfit = boosterDeliveredRevenueCalc - boosterTotalCogs;
 
     // Expenses Calculations
-    const usdToInr = 86.19; // Fixed conversion rate based on provided data
+    const usdToInr = 86.19; // Fixed conversion rate
     const shopifyDaily = shopifySubscription / 30;
     const shopifyInr = shopifyDaily * usdToInr;
     const shopifyTotal = shopifyInr * 30;
@@ -80,13 +95,11 @@ function calculate() {
 
     // Update Orders Section
     document.getElementById('toBeShipped').textContent = toBeShipped;
-    document.getElementById('cancelPercent').textContent = cancelPercent.toFixed(0) + '%';
-    document.getElementById('rtoPercent').textContent = rtoPercent.toFixed(0) + '%';
-    document.getElementById('toBeShippedPercent').textContent = '99%';
+    document.getElementById('cancelPercent').textContent = formatPercentage(cancelPercent);
+    document.getElementById('rtoPercent').textContent = formatPercentage(rtoPercent);
+    document.getElementById('toBeShippedPercent').textContent = toBeShipped ? '100%' : '0%';
     document.getElementById('deliveredOrders').textContent = delivered;
-    document.getElementById('deliveredPercent').textContent = deliveredPercent.toFixed(0) + '%';
-    document.getElementById('rtoOrdersCopy').textContent = rtoOrders;
-    document.getElementById('deliveredOrdersCopy').textContent = delivered;
+    document.getElementById('deliveredPercent').textContent = formatPercentage(deliveredPercent);
     document.getElementById('costShipped').textContent = formatCurrency(costShipped);
     document.getElementById('rtoValue').textContent = formatCurrency(rtoValue);
     document.getElementById('moneyReceived').textContent = formatCurrency(moneyReceived);
@@ -98,10 +111,11 @@ function calculate() {
     document.getElementById('totalShipping').textContent = formatCurrency(totalShipping);
     document.getElementById('totalRtoShipping').textContent = formatCurrency(totalRtoShipping);
     document.getElementById('damageCost').textContent = formatCurrency(damageLoss);
-    document.getElementById('damageLoss').textContent = formatCurrency(damageLoss);
+    document.getElementById('damageExtra1').textContent = formatCurrency(damageLoss);
     document.getElementById('totalCogs').textContent = formatCurrency(totalCogs);
-    document.getElementById('actualCost').innerHTML = formatCurrency(totalCogs) + '<br><span class="note">Actual Cost of that day</span>';
+    document.getElementById('actualCost').textContent = formatCurrency(totalCogs);
     document.getElementById('profit').textContent = formatCurrency(profit);
+    document.getElementById('totalRtoNowDashboard').textContent = totalRtoNow;
 
     // Update Profit Booster Section
     document.getElementById('abandonedOrders').textContent = abandonedOrders;
@@ -110,22 +124,29 @@ function calculate() {
     document.getElementById('abandonedExtra').textContent = '0';
     document.getElementById('abandonedExtra2').textContent = '0';
     document.getElementById('abandonedExtra3').textContent = '0';
+    document.getElementById('abandonedExtra4').textContent = '0';
+    document.getElementById('abandonedExtra5').textContent = '0';
     document.getElementById('ndrOrders').textContent = ndrOrders;
     document.getElementById('ndrRevenue').textContent = formatCurrency(ndrOrders * sellingPrice);
+    document.getElementById('ndrRevenue2').textContent = formatCurrency(ndrOrders * sellingPrice);
     document.getElementById('totalRtoNow').textContent = totalRtoNow;
-    document.getElementById('ndrRate').textContent = ndrRate.toFixed(2) + '%';
+    document.getElementById('ndrRate').textContent = formatPercentage(ndrRate);
     document.getElementById('abandonedNdrOrders').textContent = abandonedOrders + ndrOrders;
+    document.getElementById('abandonedNdrOrdersCopy').textContent = abandonedOrders + ndrOrders;
     document.getElementById('totalDeliveredNow').textContent = totalDeliveredNow;
-    document.getElementById('boosterDeliveredRevenue').textContent = formatCurrency(boosterDeliveredRevenue);
+    document.getElementById('boosterDeliveredRevenue').textContent = formatCurrency(boosterDeliveredRevenueCalc);
     document.getElementById('boosterDeliveredOrders').textContent = abandonedOrders + ndrOrders;
-    document.getElementById('boosterDeliveredTotal').textContent = formatCurrency(boosterDeliveredRevenue);
-    document.getElementById('boosterProductCost').textContent = formatCurrency(boosterProductCost);
+    document.getElementById('boosterDeliveredTotal').textContent = formatCurrency(boosterDeliveredRevenueCalc);
+    document.getElementById('boosterProductCost').textContent = formatCurrency(boosterProductCostCalc);
     document.getElementById('boosterProductOrders').textContent = abandonedOrders + ndrOrders;
-    document.getElementById('boosterProductTotal').textContent = formatCurrency(boosterProductCost);
-    document.getElementById('boosterShippingCost').textContent = formatCurrency(boosterShippingCost);
-    document.getElementById('boosterRtoShipping').textContent = formatCurrency(boosterRtoShipping);
+    document.getElementById('boosterProductTotal').textContent = formatCurrency(boosterProductCostCalc);
+    document.getElementById('boosterShippingCost').textContent = formatCurrency(boosterShippingCostCalc);
+    document.getElementById('boosterRtoShipping').textContent = formatCurrency(boosterRtoShippingCalc);
     document.getElementById('boosterTotalCogs').textContent = formatCurrency(boosterTotalCogs);
     document.getElementById('boosterProfit').textContent = formatCurrency(boosterProfit);
+
+    // Update Net Profit For Hard Workers
+    document.getElementById('netProfitHardWorkers').textContent = formatCurrency(netProfit);
 
     // Update Expenses Section
     document.getElementById('shopifyDaily').textContent = formatCurrency(shopifyDaily, '$');
@@ -143,8 +164,24 @@ function calculate() {
     document.getElementById('monthlyProfit').textContent = formatCurrency(monthlyProfit);
 }
 
-document.querySelectorAll('[contenteditable=true]').forEach(cell => {
-    cell.addEventListener('input', calculate);
+// Add event listeners to all contenteditable green cells
+document.querySelectorAll('.green-cell[contenteditable="true"]').forEach(cell => {
+    cell.addEventListener('input', () => {
+        // Clean input by removing invalid characters, preserving numbers and decimal points
+        let value = cell.textContent.trim();
+        if (cell.id.includes('Percent') || cell.id.includes('Rate') || cell.id.includes('abandonedCheckout')) {
+            value = value.replace(/[^0-9.]/g, '');
+            cell.textContent = value ? `${value}%` : '0%';
+        } else if (cell.id.includes('shopify') || cell.id.includes('otherApp')) {
+            value = value.replace(/[^0-9.]/g, '');
+            cell.textContent = value ? `$${value}` : '$0.00';
+        } else {
+            value = value.replace(/[^0-9.]/g, '');
+            cell.textContent = value || '0';
+        }
+        calculate();
+    });
 });
 
+// Initialize calculations on page load
 window.onload = calculate;
