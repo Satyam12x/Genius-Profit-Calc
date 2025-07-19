@@ -77,7 +77,7 @@ function calculate() {
     const boosterProfit = boosterDeliveredRevenueCalc - boosterTotalCogs;
 
     // Expenses Calculations
-    const usdToInr = 86.19; // Fixed conversion rate
+    const usdToInr = 86.19; 
     const shopifyDaily = shopifySubscription / 30;
     const shopifyInr = shopifyDaily * usdToInr;
     const shopifyTotal = shopifyInr * 30;
@@ -144,11 +144,9 @@ function calculate() {
     document.getElementById('boosterRtoShipping').textContent = formatCurrency(boosterRtoShippingCalc);
     document.getElementById('boosterTotalCogs').textContent = formatCurrency(boosterTotalCogs);
     document.getElementById('boosterProfit').textContent = formatCurrency(boosterProfit);
-
-    // Update Net Profit For Hard Workers
     document.getElementById('netProfitHardWorkers').textContent = formatCurrency(netProfit);
 
-    // Update Expenses Section
+
     document.getElementById('shopifyDaily').textContent = formatCurrency(shopifyDaily, '$');
     document.getElementById('shopifyInr').textContent = formatCurrency(shopifyInr);
     document.getElementById('shopifyTotal').textContent = formatCurrency(shopifyTotal);
@@ -164,10 +162,8 @@ function calculate() {
     document.getElementById('monthlyProfit').textContent = formatCurrency(monthlyProfit);
 }
 
-// Add event listeners to all contenteditable green cells
 document.querySelectorAll('.green-cell[contenteditable="true"]').forEach(cell => {
     cell.addEventListener('input', () => {
-        // Clean input by removing invalid characters, preserving numbers and decimal points
         let value = cell.textContent.trim();
         if (cell.id.includes('Percent') || cell.id.includes('Rate') || cell.id.includes('abandonedCheckout')) {
             value = value.replace(/[^0-9.]/g, '');
@@ -183,5 +179,4 @@ document.querySelectorAll('.green-cell[contenteditable="true"]').forEach(cell =>
     });
 });
 
-// Initialize calculations on page load
 window.onload = calculate;

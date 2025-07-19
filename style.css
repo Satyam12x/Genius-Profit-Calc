@@ -128,27 +128,7 @@ body {
 
 .red {
     background-color: red;
-    padding: 0px !important;
-}
-
-.dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    background-color: red;
     color: white;
-    text-align: center;
-    font-weight: bold;
-    border: 0px solid #000;
-}
-
-.dashboard div {
-    border: 1px solid #000;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 .big-number {
@@ -167,7 +147,7 @@ body {
 }
 
 .rto-text {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.3;
 }
 

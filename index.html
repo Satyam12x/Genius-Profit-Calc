@@ -1,272 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Genius Maker Profit Calculator Sheet</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="calculator">
-        <div class="header yellow-box bold">
-            Genius Maker Profit Calculator Sheet
-        </div>
-        <div class="sub-note">
-            <span>Important Note:</span> Make Changes on the cells with <span style="color: red;">green</span> color
-            only
-        </div>
+      <div class="header yellow-box bold">
+        Genius Maker Profit Calculator Sheet
+      </div>
+      <div class="sub-note">
+        <span>Important Note:</span> Make Changes on the cells with
+        <span style="color: red">green</span> color only
+      </div>
 
-        <!-- Orders Section -->
-        <table class="calc-table">
-            <tr>
-                <th colspan="3" class="yellow-box">Orders</th>
-                <td class="white-cell"></td>
-                <td class="white-cell"></td>
-            </tr>
-            <tr class="orders-row">
-                <td class="pink-cell">Total Orders Received</td>
-                <td contenteditable="true" class="green-cell" id="totalOrders">0</td>
-                <td class="white-cell"></td>
-                <td class="white-cell"></td>
-                <td class="white-cell"></td>
-            </tr>
-            <tr class="orders-row">
-                <td class="pink-cell">Cancelled Over Call</td>
-                <td contenteditable="true" class="green-cell" id="cancelled">0</td>
-                <td class="white-cell" id="cancelPercent">0%</td>
-                <td class="white-cell"></td>
-                <td class="white-cell"></td>
-            </tr>
-            <tr class="orders-row">
-                <td class="pink-cell">Order To Be Shipped</td>
-                <td id="toBeShipped" class="white-cell">0</td>
-                <td id="toBeShippedPercent" class="white-cell">0%</td>
-                <td class="red-cell" id="costShipped">₹0.00</td>
-                <td class="red-cell">Cost of total products Shipped</td>
-            </tr>
-            <tr class="orders-row">
-                <td class="pink-cell">RTO Percentage</td>
-                <td contenteditable="false" class="white-cell" id="rtoOrders">0</td>
-                <td contenteditable="true" class="green-cell" id="rtoPercent">0%</td>
-                <td class="red-cell" id="rtoValue">₹0.00</td>
-                <td class="red-cell">RTO Products Value Re-Stocked</td>
-            </tr>
-            <tr class="orders-row">
-                <td class="pink-cell">Delivered Orders</td>
-                <td id="deliveredOrders" class="white-cell">0</td>
-                <td id="deliveredPercent" class="white-cell">0%</td>
-                <td class="red-cell" id="moneyReceived">₹0.00</td>
-                <td class="red-cell">Actual Money Received on that Day</td>
-            </tr>
-        </table>
+      <table class="calc-table">
+        <tr>
+          <th colspan="3" class="yellow-box">Orders</th>
+          <!-- <td class="white-cell"></td>
+          <td class="white-cell"></td> -->
+        </tr>
+        <tr class="orders-row">
+          <td class="pink-cell">Total Orders Received</td>
+          <td contenteditable="true" class="green-cell" id="totalOrders">0</td>
+          <td class="white-cell"></td>
+          <!-- <td class="white-cell"></td>
+          <td class="white-cell"></td> -->
+        </tr>
+        <tr class="orders-row">
+          <td class="pink-cell">Cancelled Over Call</td>
+          <td contenteditable="true" class="green-cell" id="cancelled">0</td>
+          <td class="white-cell" id="cancelPercent">0%</td>
+          <!-- <td class="white-cell"></td>
+          <td class="white-cell"></td> -->
+        </tr>
+        <tr class="orders-row">
+          <td class="pink-cell">Order To Be Shipped</td>
+          <td id="toBeShipped" class="white-cell">0</td>
+          <td id="toBeShippedPercent" class="white-cell">0%</td>
+          <td class="red-cell" id="costShipped">₹0.00</td>
+          <td class="red-cell">Cost of total products Shipped</td>
+        </tr>
+        <tr class="orders-row">
+          <td class="pink-cell">RTO Percentage</td>
+          <td contenteditable="false" class="white-cell" id="rtoOrders">0</td>
+          <td contenteditable="true" class="green-cell" id="rtoPercent">0%</td>
+          <td class="red-cell" id="rtoValue">₹0.00</td>
+          <td class="red-cell">RTO Products Value Re-Stocked</td>
+        </tr>
+        <tr class="orders-row">
+          <td class="pink-cell">Delivered Orders</td>
+          <td id="deliveredOrders" class="white-cell">0</td>
+          <td id="deliveredPercent" class="white-cell">0%</td>
+          <td class="red-cell" id="moneyReceived">₹0.00</td>
+          <td class="red-cell">Actual Money Received on that Day</td>
+        </tr>
+      </table>
 
-        <!-- Price and Costing Section -->
-        <div class="yellow-box">Price and Costing</div>
-        <table class="calc-table">
-            <tr>
-                <td class="darksalmon">Selling Price</td>
-                <td contenteditable="true" class="green-cell" id="sellingPrice">0.00</td>
-                <td contenteditable="true" class="green-cell" id="middleZero1">0</td>
-                <td id="sellingTotal">₹0.00</td>
-                <td rowspan="2" class="note bold">Amount of Total Orders Delivered</td>
-            </tr>
-            <tr>
-                <td class="darksalmon">Cost of Product</td>
-                <td contenteditable="true" class="green-cell" id="productCost">0.00</td>
-                <td contenteditable="true" class="green-cell" id="middleZero2">0</td>
-                <td id="totalProductCost">₹0.00</td>
-            </tr>
-            <tr>
-                <td class="darksalmon">FB Ad Cost</td>
-                <td contenteditable="true" class="green-cell" id="fbCost">0.00</td>
-                <td contenteditable="true" class="green-cell" id="fbGST">0</td>
-                <td id="totalFbCost">₹0.00</td>
-                <td class="note bold">FB Cost + GST</td>
-            </tr>
-            <tr>
-                <td class="darksalmon">Shipping Cost</td>
-                <td contenteditable="true" class="green-cell" id="shippingCost">0.00</td>
-                <td contenteditable="false" class="white-cell" id="middleZero3">0</td>
-                <td id="totalShipping">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="darksalmon">RTO Shipping</td>
-                <td contenteditable="true" class="green-cell" id="rtoShipping">0.00</td>
-                <td contenteditable="true" class="green-cell" id="middleZero4">0</td>
-                <td id="totalRtoShipping">₹0.00</td>
-                <td rowspan="2" class="red">
-                    <div class="dashboard">
-                        <div class="big-number" id="totalRtoNowDashboard">0</div>
-                        <div class="rto-text">RTO Products after abandoned<br>checkout and NDR</div>
-                        <div>0</div>
-                        <div>0</div>
-                        <div class="cost" id="actualCost">₹0.00</div>
-                        <div class="highlight-yellow">Actual Cost of that day</div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="darksalmon">Product Damage During RTO</td>
-                <td contenteditable="true" class="green-cell" id="damageRate">0.00%</td>
-                <td id="damageCost">₹0.00</td>
-                <td id="damageExtra1">₹0.00</td>
-            </tr>
-            <tr class="total-row">
-                <td class="darksalmon">Total COGS</td>
-                <td colspan="2"></td>
-                <td class="bold" id="totalCogs">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr class="total-row">
-                <td class="darksalmon bold">Profit</td>
-                <td colspan="2"></td>
-                <td class="bold" id="profit">₹0.00</td>
-                <td></td>
-            </tr>
-        </table>
+      <!-- Price and Costing Section -->
+      <div class="yellow-box">Price and Costing</div>
+      <table class="calc-table">
+        <tr>
+          <td class="darksalmon">Selling Price</td>
+          <td contenteditable="true" class="green-cell" id="sellingPrice">
+            0.00
+          </td>
+          <td contenteditable="true" class="green-cell" id="middleZero1">0</td>
+          <td id="sellingTotal">₹0.00</td>
+          <td rowspan="2" class="note bold">
+            Amount of Total Orders Delivered
+          </td>
+        </tr>
+        <tr>
+          <td class="darksalmon">Cost of Product</td>
+          <td contenteditable="true" class="green-cell" id="productCost">
+            0.00
+          </td>
+          <td contenteditable="true" class="green-cell" id="middleZero2">0</td>
+          <td id="totalProductCost">₹0.00</td>
+        </tr>
+        <tr>
+          <td class="darksalmon">FB Ad Cost</td>
+          <td contenteditable="true" class="green-cell" id="fbCost">0.00</td>
+          <td contenteditable="true" class="green-cell" id="fbGST">0</td>
+          <td id="totalFbCost">₹0.00</td>
+          <td class="note bold">FB Cost + GST</td>
+        </tr>
+        <tr>
+          <td class="darksalmon">Shipping Cost</td>
+          <td contenteditable="true" class="green-cell" id="shippingCost">
+            0.00
+          </td>
+          <td contenteditable="false" class="white-cell" id="middleZero3">0</td>
+          <td id="totalShipping">₹0.00</td>
+        </tr>
+        <tr>
+          <td class="darksalmon">RTO Shipping</td>
+          <td contenteditable="true" class="green-cell" id="rtoShipping">
+            0.00
+          </td>
+          <td contenteditable="true" class="green-cell" id="middleZero4">0</td>
+          <td id="totalRtoShipping">₹0.00</td>
 
-        <!-- Profit Booster Section -->
-        <div class="yellow-box">Profit Booster 🔥</div>
-        <table class="calc-table">
-            <tr>
-                <th colspan="4">Profit Booster 🔥</th>
-                <th>No. of orders</th>
-                <th>Selling Price</th>
-                <th colspan="5" class="white-box"></th>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">Abandoned Checkout</td>
-                <td contenteditable="true" class="green-cell" id="abandonedCheckout">0.00%</td>
-                <td id="abandonedOrders" class="white-cell">0</td>
-                <td contenteditable="true" class="green-cell" id="abandonedCheckout2">0.00%</td>
-                <td contenteditable="false" class="white-cell" id="abandonedOrdersCopy">0</td>
-                <td id="abandonedRevenue" class="white-cell">₹0.00</td>
-                <td class="red-cell" id="abandonedExtra">0</td>
-                <td class="red-cell" id="abandonedExtra2">0</td>
-                <td class="red-cell" id="abandonedExtra3">0</td>
-                <td class="red-cell" id="abandonedExtra4">0</td>
-                <td class="red-cell" id="abandonedExtra5">0</td>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">NDR Calling</td>
-                <td contenteditable="true" class="green-cell" id="ndrCalling">0.00%</td>
-                <td id="ndrOrders" class="white-cell">0</td>
-                <td contenteditable="true" class="green-cell" id="ndrRevenue">₹0.00</td>
-                <td id="ndrOrders2" class="white-cell">0</td>
-                <td id="ndrRevenue2" class="white-cell">₹0.00</td>
-                <td class="red-cell" id="totalRtoNow">0</td>
-                <td class="red-cell bold-yellow">888</td>
-                <td class="red-cell" colspan="2">Total RTO Now</td>
-                <td contenteditable="true" class="green-cell" id="ndrRate">60.00%</td>
-                <td class="red-cell">NDR Delivery Rate</td>
-            </tr>
-            <tr class="light-blue">
-                <td class="darksalmon" colspan="1">Abandoned Checkout + NDR</td>
-                <td colspan="3" id="abandonedNdrOrders">0</td>
-                <td colspan="2" id="abandonedNdrOrdersCopy">0</td>
-                <td class="red-cell" id="totalDeliveredNow">0</td>
-                <td class="red-cell bold-yellow">2072</td>
-                <td class="red-cell" colspan="3">Total Delivered Now</td>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">Orders Delivered</td>
-                <td class="green-cell" colspan="3" id="boosterDeliveredRevenue">₹0.00</td>
-                <td id="boosterDeliveredOrders" class="white-cell">0</td>
-                <td id="boosterDeliveredTotal" class="white-cell">₹0.00</td>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">Cost of Product</td>
-                <td class="green-cell" colspan="3" id="boosterProductCost">₹0.00</td>
-                <td id="boosterProductOrders" class="white-cell">0</td>
-                <td id="boosterProductTotal" class="white-cell">₹0.00</td>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">Shipping Cost</td>
-                <td class="green-cell" colspan="3" id="boosterShippingCost">₹0.00</td>
-                <td class="white-cell">0</td>
-                <td class="white-cell">₹0.00</td>
-            </tr>
-            <tr class="profit-booster-row">
-                <td class="darksalmon">RTO Shipping</td>
-                <td class="green-cell" colspan="3" id="boosterRtoShipping">₹0.00</td>
-                <td class="white-cell">0</td>
-                <td class="white-cell">₹0.00</td>
-            </tr>
-            <tr class="section-total">
-                <td class="darksalmon" colspan="5">Total COGS</td>
-                <td id="boosterTotalCogs">₹0.00</td>
-            </tr>
-            <tr class="section-total">
-                <td class="darksalmon" colspan="5">Profit</td>
-                <td id="boosterProfit">₹0.00</td>
-            </tr>
-        </table>
+          <td class="big-number red" id="totalRtoNowDashboard">0</td>
+          <td class="rto-text red">
+            RTO Products after abandoned<br />checkout and NDR
+          </td>
+        </tr>
+        <tr>
+          <td class="darksalmon">Product Damage During RTO</td>
+          <td contenteditable="true" class="green-cell" id="damageRate">
+            0.00%
+          </td>
+          <td id="damageCost">₹0.00</td>
+          <td id="damageExtra1">₹0.00</td>
+          <td class="red">0</td>
+          <td class="red">0</td>
+        </tr>
+        <tr class="total-row">
+          <td class="darksalmon">Total COGS</td>
+          <td colspan="2"></td>
+          <td class="bold" id="totalCogs">₹0.00</td>
+          <td class="cost red" id="actualCost">₹0.00</td>
+          <td class="highlight-yellow red">Actual Cost of that day</td>
+        </tr>
+        <tr class="total-row">
+          <td class="darksalmon bold">Profit</td>
+          <td colspan="2"></td>
+          <td class="bold" id="profit">₹0.00</td>
+        </tr>
+      </table>
 
-        <!-- Net Profit For Hard Workers Section -->
-        <div class="net-profit-container">
-            <h2 class="text-2xl font-bold text-gray-800 mr-4">Net Profit For Hard Workers</h2>
-            <div class="net-profit-value" id="netProfitHardWorkers">₹0.00</div>
-        </div>
+      <!-- Profit Booster Section -->
+      <div class="yellow-box">Profit Booster 🔥</div>
+      <table class="calc-table">
+        <tr>
+          <th colspan="4">Profit Booster 🔥</th>
+          <th>No. of orders</th>
+          <th>Selling Price</th>
+          <th colspan="5" class="white-box"></th>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">Abandoned Checkout</td>
+          <td contenteditable="true" class="green-cell" id="abandonedCheckout">
+            0.00%
+          </td>
+          <td id="abandonedOrders" class="white-cell">0</td>
+          <td contenteditable="true" class="green-cell" id="abandonedCheckout2">
+            0.00%
+          </td>
+          <td
+            contenteditable="false"
+            class="white-cell"
+            id="abandonedOrdersCopy"
+          >
+            0
+          </td>
+          <td id="abandonedRevenue" class="white-cell">₹0.00</td>
+          <td class="red-cell" id="abandonedExtra">0</td>
+          <td class="red-cell" id="abandonedExtra2">0</td>
+          <td class="red-cell" id="abandonedExtra3">0</td>
+          <td class="red-cell" id="abandonedExtra4">0</td>
+          <td class="red-cell" id="abandonedExtra5">0</td>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">NDR Calling</td>
+          <td contenteditable="true" class="green-cell" id="ndrCalling">
+            0.00%
+          </td>
+          <td id="ndrOrders" class="white-cell">0</td>
+          <td contenteditable="true" class="green-cell" id="ndrRevenue">
+            ₹0.00
+          </td>
+          <td id="ndrOrders2" class="white-cell">0</td>
+          <td id="ndrRevenue2" class="white-cell">₹0.00</td>
+          <td class="red-cell" id="totalRtoNow">0</td>
+          <td class="red-cell bold-yellow">888</td>
+          <td class="red-cell" colspan="2">Total RTO Now</td>
+          <td contenteditable="true" class="green-cell" id="ndrRate">60.00%</td>
+          <td class="red-cell">NDR Delivery Rate</td>
+        </tr>
+        <tr class="light-blue">
+          <td class="darksalmon" colspan="1">Abandoned Checkout + NDR</td>
+          <td colspan="3" id="abandonedNdrOrders">0</td>
+          <td colspan="2" id="abandonedNdrOrdersCopy">0</td>
+          <td class="red-cell" id="totalDeliveredNow">0</td>
+          <td class="red-cell bold-yellow">2072</td>
+          <td class="red-cell" colspan="3">Total Delivered Now</td>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">Orders Delivered</td>
+          <td class="green-cell" colspan="3" id="boosterDeliveredRevenue">
+            ₹0.00
+          </td>
+          <td id="boosterDeliveredOrders" class="white-cell">0</td>
+          <td id="boosterDeliveredTotal" class="white-cell">₹0.00</td>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">Cost of Product</td>
+          <td class="green-cell" colspan="3" id="boosterProductCost">₹0.00</td>
+          <td id="boosterProductOrders" class="white-cell">0</td>
+          <td id="boosterProductTotal" class="white-cell">₹0.00</td>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">Shipping Cost</td>
+          <td class="green-cell" colspan="3" id="boosterShippingCost">₹0.00</td>
+          <td class="white-cell">0</td>
+          <td class="white-cell">₹0.00</td>
+        </tr>
+        <tr class="profit-booster-row">
+          <td class="darksalmon">RTO Shipping</td>
+          <td class="green-cell" colspan="3" id="boosterRtoShipping">₹0.00</td>
+          <td class="white-cell">0</td>
+          <td class="white-cell">₹0.00</td>
+        </tr>
+        <tr class="section-total">
+          <td class="darksalmon" colspan="5">Total COGS</td>
+          <td id="boosterTotalCogs">₹0.00</td>
+        </tr>
+        <tr class="section-total">
+          <td class="darksalmon" colspan="5">Profit</td>
+          <td id="boosterProfit">₹0.00</td>
+        </tr>
+      </table>
 
-        <!-- Expenses Section -->
-        <div class="yellow-box">Expenses</div>
-        <table class="calc-table">
-            <tr>
-                <td contenteditable="true" class="green-cell">Shopify Basic Subscription</td>
-                <td contenteditable="true" class="green-cell" id="shopifySubscription">$0.00</td>
-                <td id="shopifyDaily">$0.00</td>
-                <td id="shopifyInr">₹0.00</td>
-                <td class="red-box" id="shopifyTotal">₹0.00</td>
-            </tr>
-            <tr>
-                <td contenteditable="true" class="green-cell">Shopify App</td>
-                <td contenteditable="true" class="green-cell" id="shopifyApp">$0.00</td>
-                <td id="shopifyAppDaily">$0.00</td>
-                <td id="shopifyAppInr">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td contenteditable="true" class="green-cell">Other App</td>
-                <td contenteditable="true" class="green-cell" id="otherApp">$0.00</td>
-                <td id="otherAppDaily">$0.00</td>
-                <td id="otherAppInr">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td contenteditable="true" class="green-cell">Telecaller</td>
-                <td contenteditable="true" class="green-cell" id="telecaller">₹0.00</td>
-                <td id="telecallerDaily">₹0.00</td>
-                <td id="telecallerInr">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td contenteditable="true" class="green-cell">Other Charges</td>
-                <td contenteditable="true" class="green-cell" id="otherCharges">₹0.00</td>
-                <td id="otherChargesDaily">₹0.00</td>
-                <td id="otherChargesInr">₹0.00</td>
-                <td></td>
-            </tr>
-            <tr class="total-row">
-                <td class="darksalmon">Net Profit</td>
-                <td></td>
-                <td></td>
-                <td class="profit-value" id="netProfit">₹0.00</td>
-                <td></td>
-            </tr>
-        </table>
+      <!-- Net Profit For Hard Workers Section -->
+      <div class="net-profit-container">
+        <h2 class="text-2xl font-bold text-gray-800 mr-4">
+          Net Profit For Hard Workers
+        </h2>
+        <div class="net-profit-value" id="netProfitHardWorkers">₹0.00</div>
+      </div>
 
-        <!-- Expected Profit Per Month Section -->
-        <div
-            style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
-            <h2 class="text-xl font-bold">Expected Profit Per Month (30 Days)</h2>
-            <div class="profit-value" id="monthlyProfit">₹0.00</div>
-        </div>
+      <!-- Expenses Section -->
+      <div class="yellow-box">Expenses</div>
+      <table class="calc-table">
+        <tr>
+          <td contenteditable="true" class="green-cell">
+            Shopify Basic Subscription
+          </td>
+          <td
+            contenteditable="true"
+            class="green-cell"
+            id="shopifySubscription"
+          >
+            $0.00
+          </td>
+          <td id="shopifyDaily">$0.00</td>
+          <td id="shopifyInr">₹0.00</td>
+          <td class="red-box" id="shopifyTotal">₹0.00</td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green-cell">Shopify App</td>
+          <td contenteditable="true" class="green-cell" id="shopifyApp">
+            $0.00
+          </td>
+          <td id="shopifyAppDaily">$0.00</td>
+          <td id="shopifyAppInr">₹0.00</td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green-cell">Other App</td>
+          <td contenteditable="true" class="green-cell" id="otherApp">$0.00</td>
+          <td id="otherAppDaily">$0.00</td>
+          <td id="otherAppInr">₹0.00</td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green-cell">Telecaller</td>
+          <td contenteditable="true" class="green-cell" id="telecaller">
+            ₹0.00
+          </td>
+          <td id="telecallerDaily">₹0.00</td>
+          <td id="telecallerInr">₹0.00</td>
+        </tr>
+        <tr>
+          <td contenteditable="true" class="green-cell">Other Charges</td>
+          <td contenteditable="true" class="green-cell" id="otherCharges">
+            ₹0.00
+          </td>
+          <td id="otherChargesDaily">₹0.00</td>
+          <td id="otherChargesInr">₹0.00</td>
+        </tr>
+        <tr class="total-row">
+          <td class="darksalmon">Net Profit</td>
+          <td></td>
+          <td></td>
+          <td class="profit-value" id="netProfit">₹0.00</td>
+        </tr>
+      </table>
+
+      <!-- Expected Profit Per Month Section -->
+      <div
+        style="
+          background-color: #f3f4f6;
+          padding: 16px;
+          border-radius: 8px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 16px;
+        "
+      >
+        <h2 class="text-xl font-bold">Expected Profit Per Month (30 Days)</h2>
+        <div class="profit-value" id="monthlyProfit">₹0.00</div>
+      </div>
     </div>
 
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>
